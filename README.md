@@ -1,55 +1,28 @@
-# 🌀 bluer-plugin
+# 📜 blueflow
 
-🌀 `@plugin` is a git template for a [`bluer-ai`](https://github.com/kamangir/bluer-ai) plugin, to build [things like these](https://github.com/kamangir?tab=repositories), that out-of-the-box support,
-
-- a [github repo](https://github.com/) with [actions](https://github.com/features/actions).
-- [pylint](https://pypi.org/project/pylint/).
-- [pytest](https://docs.pytest.org/).
-- a pip-installable python + bash package published to [pypi](https://pypi.org/).
-- a bash [command interface](./bluer_plugin/.abcli/bluer_plugin.sh).
-- [bash testing](./.github/workflows/bashtest.yml).
-- in-repo [compiled](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README) READMEs. example: [template.md](https://github.com/kamangir/palisades/blob/main/palisades/docs/damage-analytics-template.md) -> [README.md](https://github.com/kamangir/palisades/blob/main/palisades/docs/damage-analytics.md).
-- [object management](https://github.com/kamangir/blue-objects) with cloud persistence with metadata tracking by [MLflow](https://mlflow.org/).
-
-## installation
+📜 `blueflow` for workflow management on [aws batch](https://aws.amazon.com/batch/) and more.
 
 ```bash
-pip install bluer-plugin
+pip install blueflow
 ```
 
-## creating a bluer-plugin
+|   |   |   |   |   |
+| --- | --- | --- | --- | --- |
+| 📜 | [`a-bc-d`](./patterns/a-bc-d.dot) | [`hourglass`](./patterns/hourglass.dot) | [`map-reduce`](./patterns/map-reduce.dot) | [`map-reduce-large`](./patterns/map-reduce-large.dot) |
+| [aws_batch](./runners/aws_batch.py) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-a-bc-d/workflow.gif?raw=true&random=mbb7he4dnxupqpa9)](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-a-bc-d/workflow.gif?raw=true&random=mbb7he4dnxupqpa9) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-a-bc-d/workflow.gif?raw=true&random=mbb7he4dnxupqpa9) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-hourglass/workflow.gif?raw=true&random=8ictytqwfxk8cvap)](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-hourglass/workflow.gif?raw=true&random=8ictytqwfxk8cvap) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-hourglass/workflow.gif?raw=true&random=8ictytqwfxk8cvap) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-map-reduce/workflow.gif?raw=true&random=qtelmug8kltg3pg3)](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-map-reduce/workflow.gif?raw=true&random=qtelmug8kltg3pg3) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-map-reduce/workflow.gif?raw=true&random=qtelmug8kltg3pg3) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-map-reduce-large/workflow.gif?raw=true&random=821q32plcrimf458)](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-map-reduce-large/workflow.gif?raw=true&random=821q32plcrimf458) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/aws_batch-map-reduce-large/workflow.gif?raw=true&random=821q32plcrimf458) |
+| [generic](./runners/generic.py) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-a-bc-d/workflow.gif?raw=true&random=xaur309dbdqzp5pt)](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-a-bc-d/workflow.gif?raw=true&random=xaur309dbdqzp5pt) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-a-bc-d/workflow.gif?raw=true&random=xaur309dbdqzp5pt) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-hourglass/workflow.gif?raw=true&random=qjcrs9aaj186u8u3)](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-hourglass/workflow.gif?raw=true&random=qjcrs9aaj186u8u3) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-hourglass/workflow.gif?raw=true&random=qjcrs9aaj186u8u3) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-map-reduce/workflow.gif?raw=true&random=vc4yshol8vntmygg)](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-map-reduce/workflow.gif?raw=true&random=vc4yshol8vntmygg) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-map-reduce/workflow.gif?raw=true&random=vc4yshol8vntmygg) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-map-reduce-large/workflow.gif?raw=true&random=2iijhlniig21rzj8)](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-map-reduce-large/workflow.gif?raw=true&random=2iijhlniig21rzj8) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/generic-map-reduce-large/workflow.gif?raw=true&random=2iijhlniig21rzj8) |
+| [local](./runners/local.py) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-a-bc-d/workflow.gif?raw=true&random=lwtt4mbachmlwq1p)](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-a-bc-d/workflow.gif?raw=true&random=lwtt4mbachmlwq1p) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-a-bc-d/workflow.gif?raw=true&random=lwtt4mbachmlwq1p) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-hourglass/workflow.gif?raw=true&random=ecnqeweyonfg6zei)](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-hourglass/workflow.gif?raw=true&random=ecnqeweyonfg6zei) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-hourglass/workflow.gif?raw=true&random=ecnqeweyonfg6zei) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-map-reduce/workflow.gif?raw=true&random=4l0xkub13vnt40cb)](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-map-reduce/workflow.gif?raw=true&random=4l0xkub13vnt40cb) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-map-reduce/workflow.gif?raw=true&random=4l0xkub13vnt40cb) | [![image](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-map-reduce-large/workflow.gif?raw=true&random=cik9jn5chb3wgcwv)](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-map-reduce-large/workflow.gif?raw=true&random=cik9jn5chb3wgcwv) [🔗](https://kamangir-public.s3.ca-central-1.amazonaws.com/local-map-reduce-large/workflow.gif?raw=true&random=cik9jn5chb3wgcwv) |
 
-1️⃣ create a new repository from [this template](https://github.com/kamangir/bluer-plugin),
+💡 example use: [literature review using OpenAI API](https://github.com/kamangir/openai-commands/tree/main/openai_commands/literature_review).
 
-2️⃣ complete `<repo-name>` and `<plugin-name>` and run,
-
-```bash
-@git clone <repo-name> cd
-
-@plugins transform <repo-name>
-
-# review and clean up the repo.
-
-pip3 install -e .
-
-@init
-
-@help @<plugin-name>
-```
-
-## features
-
-|   |   |   |
-| --- | --- | --- |
-| [`feature 1`](#) [![image](https://github.com/kamangir/assets/raw/main/blue-plugin/marquee.png?raw=true)](#) description of feature 1 ... | [`feature 2`](#) [![image](https://github.com/kamangir/assets/raw/main/blue-plugin/marquee.png?raw=true)](#) description of feature 2 ... | [`feature 3`](#) [![image](https://github.com/kamangir/assets/raw/main/blue-plugin/marquee.png?raw=true)](#) description of feature 3 ... |
-
----
-
-> 🌀 [`blue-plugin`](https://github.com/kamangir/blue-plugin) for the [Global South](https://github.com/kamangir/bluer-south).
 
 ---
 
 
-[![pylint](https://github.com/kamangir/bluer-plugin/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/bluer-plugin/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/bluer-plugin/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/bluer-plugin/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/bluer-plugin/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/bluer-plugin/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/bluer-plugin.svg)](https://pypi.org/project/bluer-plugin/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/bluer-plugin)](https://pypistats.org/packages/bluer-plugin)
+[![pylint](https://github.com/kamangir/notebooks-and-scripts/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/notebooks-and-scripts/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/notebooks-and-scripts/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/notebooks-and-scripts/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/notebooks-and-scripts/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/notebooks-and-scripts/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/blueflow.svg)](https://pypi.org/project/blueflow/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/blueflow)](https://pypistats.org/packages/blueflow)
 
-built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 🌀 [`bluer_plugin-4.35.1`](https://github.com/kamangir/bluer-plugin).
+built by 🌀 [`blue_options-4.227.1`](https://github.com/kamangir/awesome-bash-cli), based on 📜 [`blueflow-4.857.1`](https://github.com/kamangir/notebooks-and-scripts).
+
+---
+
+used to be [`notebooks-and-scripts`](https://pypi.org/project/notebooks-and-scripts/).
