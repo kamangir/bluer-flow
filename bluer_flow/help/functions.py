@@ -8,7 +8,6 @@ help_functions = generic_help_functions(plugin_name=ALIAS)
 
 help_functions.update(
     {
-        "huggingface": help_huggingface,
         "workflow": help_workflow,
     }
 )
