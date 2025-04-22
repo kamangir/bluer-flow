@@ -2,9 +2,9 @@ NAME = "bluer_flow"
 
 ICON = "📜"
 
-DESCRIPTION = f"{ICON} workflow management on aws batch and more."
+DESCRIPTION = f"{ICON} workflow management."
 
-VERSION = "5.8.1"
+VERSION = "5.10.1"
 
 REPO_NAME = "bluer-flow"
 
