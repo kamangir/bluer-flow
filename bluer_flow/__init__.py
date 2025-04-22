@@ -4,7 +4,7 @@ ICON = "📜"
 
 DESCRIPTION = f"{ICON} workflow management on aws batch and more."
 
-VERSION = "5.4.1"
+VERSION = "5.5.1"
 
 REPO_NAME = "bluer-flow"
 
