@@ -1,7 +1,6 @@
 from functools import reduce
 
 from bluer_options import string
-from bluer_objects.env import ABCLI_PUBLIC_PREFIX
 
 from bluer_flow.workflow.patterns import list_of_patterns
 from bluer_flow.workflow.runners import list_of_runners
@@ -25,7 +24,7 @@ items = (
                     f"[![image]({url})]({url}) [🔗]({url})"
                     for url in [
                         "{}/{}-{}/workflow.gif?raw=true&random={}".format(
-                            ABCLI_PUBLIC_PREFIX,
+                            "ToDo: use assets",
                             runner_type,
                             pattern,
                             string.random(),
