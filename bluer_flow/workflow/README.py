@@ -23,8 +23,7 @@ items = (
                 + [
                     f"[![image]({url})]({url}) [🔗]({url})"
                     for url in [
-                        "{}/{}-{}/workflow.gif?raw=true&random={}".format(
-                            "ToDo: use assets",
+                        "https://github.com/kamangir/assets/blob/main/bluer_flow-{}-{}/workflow.gif?raw=true&random={}".format(
                             runner_type,
                             pattern,
                             string.random(),
