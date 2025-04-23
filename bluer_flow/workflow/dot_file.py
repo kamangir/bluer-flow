@@ -6,13 +6,14 @@ import networkx as nx
 from networkx.drawing.nx_pydot import write_dot
 import matplotlib.pyplot as plt
 from networkx.drawing.nx_pydot import read_dot
+import textwrap
 
 from blueness import module
 from bluer_options.logger import crash_report
-from bluer_options.host import signature as host_signature
 from bluer_objects import file, path
 
-from bluer_flow import NAME, VERSION
+from bluer_flow import NAME
+from bluer_flow.host import signature
 from bluer_flow.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -116,30 +117,25 @@ def export_graph_as_image(
             color="green",
         )
 
-    plt.title(
-        " | ".join(
-            [
-                path.name(file.path(filename)),
-                file.name(filename),
-                f"{G.number_of_nodes()} node(s)",
-                f"{G.number_of_edges()} edge(s)",
-                f"layout: {layout}",
-                f"@{hot_node}",
-            ]
-        ),
-        fontsize=10,
+    header = " | ".join(
+        [
+            path.name(file.path(filename)),
+            file.name(filename),
+            f"{G.number_of_nodes()} node(s)",
+            f"{G.number_of_edges()} edge(s)",
+            f"layout: {layout}",
+            f"@{hot_node}",
+        ]
     )
+    plt.title(header, fontsize=10)
     plt.figtext(
         0.5,
         0.01,
         "\n".join(
-            [
-                " | ".join(item)
-                for item in np.array_split(
-                    [f"{NAME}-{VERSION}"] + host_signature(),
-                    3,
-                )
-            ]
+            textwrap.wrap(
+                " | ".join(signature()),
+                width=len(header),
+            ),
         ),
         ha="center",
         fontsize=10,
