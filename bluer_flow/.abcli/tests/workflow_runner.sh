@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function test_bluer_flow_worflow_runner() {
+function test_bluer_flow_workflow_runner() {
     local options=$1
     local do_dryrun=$(bluer_ai_option_int "$options" dryrun 0)
     local list_of_runners=$(bluer_ai_option "$options" runner $BLUER_FLOW_RUNNERS_LIST)
@@ -12,7 +12,7 @@ function test_bluer_flow_worflow_runner() {
         for pattern in $(echo $list_of_patterns | tr \| " "); do
             bluer_ai_log "📜 testing runner=$runner, pattern=$pattern ..."
 
-            local job_name=$runner-$pattern-$(bluer_ai_string_timestamp)
+            local job_name=test-$runner-$pattern-$(bluer_ai_string_timestamp)
 
             bluer_flow_workflow_create \
                 pattern=$pattern \
@@ -29,6 +29,13 @@ function test_bluer_flow_worflow_runner() {
                 publish_as=$runner-$pattern \
                 $job_name
             [[ $? -ne 0 ]] && return 1
+
+            if [[ "$abcli_is_mac" == true ]]; then
+                bluer_sandbox_assets_publish \
+                    extensions=gif,push \
+                    $job_name \
+                    --asset_name bluer_flow-$runner-$pattern
+            fi
 
             bluer_ai_hr
         done
