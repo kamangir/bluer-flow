@@ -2,13 +2,13 @@ NAME = "bluer_flow"
 
 ICON = "📜"
 
-DESCRIPTION = f"{ICON} workflow management."
+DESCRIPTION = f"{ICON} Workflow management."
 
-VERSION = "5.15.1"
+VERSION = "5.16.1"
 
 REPO_NAME = "bluer-flow"
 
-MARQUEE = "https://github.com/kamangir/assets/raw/main/blue-plugin/marquee.png?raw=true"
+MARQUEE = "https://github.com/kamangir/assets/raw/main/bluer_flow-local-map-reduce/workflow.gif?raw=true"
 
 ALIAS = "@flow"
 
