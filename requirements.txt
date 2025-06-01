@@ -3,5 +3,5 @@ bluer_ai
 beautifulsoup4
 networkx
 opencv-python
-pydot
+pydot==3.0.4
 requests
