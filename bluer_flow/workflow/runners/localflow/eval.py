@@ -26,4 +26,4 @@ def eval(
         dependencies=[],
         verbose=verbose,
         type=type,
-    )
+    )[0]

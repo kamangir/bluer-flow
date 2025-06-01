@@ -2,7 +2,7 @@ from typing import Tuple
 
 from bluer_ai.env import bluer_ai_gpu_status_cache
 from bluer_objects.mlflow.lock.functions import lock, unlock
-from bluer_objects.mlflow.tags import search, create_filter_string
+from bluer_objects.mlflow.tags import search, create_filter_string, set_tags
 
 from bluer_flow.logger import logger
 
@@ -25,6 +25,15 @@ def find_job(verbose: bool = True) -> Tuple[bool, str]:
         )
     )
     job_name = list_of_jobs[0] if len(list_of_jobs) > 0 else ""
+
+    if job_name:
+        if not set_tags(
+            object_name=job_name,
+            tags={
+                "status": "RUNNING",
+            },
+        ):
+            return False
 
     if not unlock(
         object_name="localflow",
