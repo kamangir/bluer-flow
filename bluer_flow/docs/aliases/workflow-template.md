@@ -1,3 +1,3 @@
 # workflow
 
-help::: bluer_flow_workflow
+help::: bluer_flow workflow

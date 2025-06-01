@@ -1,3 +1,3 @@
 # localflow
 
-help::: bluer_flow_localflow
+help::: bluer_flow localflow
