@@ -32,10 +32,12 @@ function bluer_flow_localflow_start() {
             continue
         fi
 
+        bluer_ai_log "⏳ found job: $job_name"
         local command_line=$(bluer_objects_metadata_get \
             key=command_line,object \
             $job_name)
 
+        bluer_ai_log "⏳ command: $command_line"
         bluer_ai_eval - "$command_line"
         local status="$?"
 

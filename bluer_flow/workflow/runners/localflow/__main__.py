@@ -56,8 +56,8 @@ elif args.task == "eval":
         verbose=args.verbose == 1,
     )
 elif args.task == "find_job":
-    print(find_job())
-    success = True
+    success, job_name = find_job()
+    print(job_name)
 else:
     success = None
 
