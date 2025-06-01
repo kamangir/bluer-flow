@@ -46,7 +46,7 @@ args = parser.parse_args()
 success = False
 if args.task == "complete_job":
     success = complete_job(
-        job=args.job_name,
+        job_name=args.job_name,
         status=args.status,
     )
 elif args.task == "eval":
