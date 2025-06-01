@@ -45,6 +45,8 @@ function bluer_flow_localflow_start() {
             complete_job \
             --job_name $job_name \
             --status $status
+
+        bluer_ai_hr
     done
 
 }

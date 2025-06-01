@@ -5,7 +5,6 @@ from bluer_objects.metadata import post_to_object
 
 from bluer_flow.workflow.runners.generic import GenericRunner
 from bluer_flow.workflow.runners.localflow import ICON
-from bluer_flow.logger import logger
 
 
 class LocalFlowRunner(GenericRunner):
