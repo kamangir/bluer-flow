@@ -9,6 +9,7 @@ function test_bluer_flow_help() {
         "localflow eval" \
         "localflow list" \
         "localflow start" \
+        "localflow stop" \
         \
         "@flow workflow" \
         "@flow workflow create" \

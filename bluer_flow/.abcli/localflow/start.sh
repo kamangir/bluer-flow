@@ -2,27 +2,47 @@
 
 function bluer_flow_localflow_start() {
     local options=$1
-    local do_dryrun=$(bluer_ai_option_int "$options" dryrun 0)
-    local do_download=$(bluer_ai_option_int "$options" download $(bluer_ai_not $do_dryrun))
-    local do_upload=$(bluer_ai_option_int "$options" upload $(bluer_ai_not $do_dryrun))
+    local exit_if_no_job=$(bluer_ai_option_int "$options" exit_if_no_job 0)
 
-    local object_name_1=$(bluer_ai_clarify_object $2 .)
+    [[ "$MLFLOW_DEPLOYMENT" == "local" ]] &&
+        bluer_ai_log_warning "export MLFLOW_DEPLOYMENT=https://..."
 
-    [[ "$do_download" == 1 ]] &&
-        bluer_objects_download - $object_name_1
+    local localflow_hash=$(bluer_objects_mlflow_tags_get \
+        localflow \
+        --tag hash)
+    bluer_ai_log "⏳ hash: $localflow_hash"
 
-    local object_name_2=$(bluer_ai_clarify_object $3 bluer_flow_localflow_start-$(bluer_ai_string_timestamp))
+    while true; do
+        local localflow_hash_latest=$(bluer_objects_mlflow_tags_get \
+            localflow \
+            --tag hash)
+        if [[ "$localflow_hash_latest" != "$localflow_hash" ]]; then
+            bluer_ai_log "⏳ hash changed: $localflow_hash_latest <> $localflow_hash"
+            return 0
+        fi
 
-    bluer_ai_eval dryrun=$do_dryrun \
-        python3 -m bluer_flow.localflow \
-        start \
-        --object_name_1 $object_name_1 \
-        --object_name_2 $object_name_2 \
-        "${@:4}"
-    local status="$?"
+        local job_name=$(python3 -m bluer_flow.workflow.runners.localflow \
+            find_job)
+        if [[ -z "$job_name" ]]; then
+            bluer_ai_log "⏳ no job found."
+            [[ "$exit_if_no_job" == "1" ]] &&
+                return 0
 
-    [[ "$do_upload" == 1 ]] &&
-        bluer_objects_upload - $object_name_2
+            bluer_ai_sleep $LOCALFLOW_SLEEP_BETWEEN_JOBS
+            continue
+        fi
 
-    return $status
+        local command_line=$(bluer_objects_metadata_get \
+            key=command_line,object \
+            $job_name)
+
+        bluer_ai_eval - "$command_line"
+        local status="$?"
+
+        python3 -m bluer_flow.workflow.runners.localflow \
+            complete_job \
+            --job_name $job_name \
+            --status $status
+    done
+
 }

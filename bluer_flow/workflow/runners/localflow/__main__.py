@@ -4,7 +4,9 @@ from blueness import module
 from blueness.argparse.generic import sys_exit
 
 from bluer_flow import NAME
+from bluer_flow.workflow.runners.localflow.complete import complete_job
 from bluer_flow.workflow.runners.localflow.eval import eval
+from bluer_flow.workflow.runners.localflow.find import find_job
 from bluer_flow.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -13,10 +15,18 @@ parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,
-    help="eval",
+    help="complete_job | eval | find_job",
 )
 parser.add_argument(
     "--command_line",
+    type=str,
+)
+parser.add_argument(
+    "--job_name",
+    type=str,
+)
+parser.add_argument(
+    "--status",
     type=str,
 )
 parser.add_argument(
@@ -34,12 +44,20 @@ parser.add_argument(
 args = parser.parse_args()
 
 success = False
-if args.task == "eval":
+if args.task == "complete_job":
+    success = complete_job(
+        job=args.job_name,
+        status=args.status,
+    )
+elif args.task == "eval":
     success = eval(
         command_line=args.command_line,
         type=args.type,
         verbose=args.verbose == 1,
     )
+elif args.task == "find_job":
+    print(find_job())
+    success = True
 else:
     success = None
 

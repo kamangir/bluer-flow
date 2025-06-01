@@ -42,12 +42,29 @@ def help_start(
     tokens: List[str],
     mono: bool,
 ) -> str:
+    options = xtra("exit_if_no_job", mono=mono)
+
     return show_usage(
         [
             "localflow",
             "start",
+            f"[{options}]",
         ],
         "start localflow",
+        mono=mono,
+    )
+
+
+def help_stop(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        [
+            "localflow",
+            "stop",
+        ],
+        "stop localflow",
         mono=mono,
     )
 
@@ -56,4 +73,5 @@ help_functions = {
     "eval": help_eval,
     "list": help_list,
     "start": help_start,
+    "stop": help_stop,
 }
