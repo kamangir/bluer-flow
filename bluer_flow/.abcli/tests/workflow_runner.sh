@@ -29,6 +29,12 @@ function test_bluer_flow_workflow_runner() {
                 $job_name
             [[ $? -ne 0 ]] && return 1
 
+            if [[ "$runner" == "localflow" ]]; then
+                bluer_flow_localflow_start \
+                    exit_if_no_job
+                [[ $? -ne 0 ]] && return 1
+            fi
+
             bluer_flow_workflow_monitor \
                 publish_as=$runner-$pattern \
                 $job_name
