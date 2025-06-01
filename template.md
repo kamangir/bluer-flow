@@ -13,7 +13,7 @@ pip install bluer_flow
 # aliases
 
 [localflow](./bluer_flow/docs/aliases/localflow.md), 
-[workflow](./bluer_flow/docs/aliases/workflow.md), 
+[workflow](./bluer_flow/docs/aliases/workflow.md).
 
 
 ---
