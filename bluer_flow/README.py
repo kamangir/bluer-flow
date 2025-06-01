@@ -1,10 +1,12 @@
 import os
 
+from bluer_options.help.functions import get_help
 from bluer_objects import file, README
 
 from bluer_flow import NAME, VERSION, ICON, REPO_NAME
 from bluer_flow.workflow.README import items as workflow_items
 from bluer_flow.workflow.patterns import list_of_patterns
+from bluer_flow.help.functions import help_functions
 
 
 def build():
@@ -17,6 +19,11 @@ def build():
             NAME=NAME,
             VERSION=VERSION,
             REPO_NAME=REPO_NAME,
+            help_function=lambda tokens: get_help(
+                tokens,
+                help_functions,
+                mono=True,
+            ),
         )
         for readme in [
             {"items": [], "path": ".."},

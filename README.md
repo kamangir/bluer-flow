@@ -24,4 +24,4 @@ pip install bluer_flow
 
 [![pylint](https://github.com/kamangir/bluer-flow/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/bluer-flow/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/bluer-flow/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/bluer-flow/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/bluer-flow/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/bluer-flow/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/bluer-flow.svg)](https://pypi.org/project/bluer-flow/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/bluer-flow)](https://pypistats.org/packages/bluer-flow)
 
-built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 📜 [`bluer_flow-5.30.1`](https://github.com/kamangir/bluer-flow).
+built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 📜 [`bluer_flow-5.31.1`](https://github.com/kamangir/bluer-flow).
