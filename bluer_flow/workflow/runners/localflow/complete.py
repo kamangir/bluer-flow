@@ -34,7 +34,7 @@ def complete_job(
     list_of_dependent_jobs = search(
         create_filter_string(
             {
-                f"depends-on-{job_name}": 1,
+                f"depends-on-{job_name}": "yes",
             }
         )
     )
@@ -56,7 +56,7 @@ def complete_job(
         if not set_tags(
             object_name=dependent_job_name,
             tags={
-                f"depends-on-{job_name}": 0,
+                f"depends-on-{job_name}": "no",
             },
             icon=ICON,
         ):
@@ -69,7 +69,7 @@ def complete_job(
         remaining_dependencies = [
             dependency.split("depends-on-", 1)[1]
             for dependency, value in list_of_tags.items()
-            if dependency.startswith("depends-on-") and value == 1
+            if dependency.startswith("depends-on-") and value == "yes"
         ]
         if remaining_dependencies:
             logger.info(

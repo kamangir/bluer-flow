@@ -36,7 +36,9 @@ class LocalFlowRunner(GenericRunner):
         ):
             return False, {"job_id": job_name}
 
-        list_of_tags = {f"depends-on-{dependency}": 1 for dependency in dependencies}
+        list_of_tags = {
+            f"depends-on-{dependency}": "yes" for dependency in dependencies
+        }
         list_of_tags.update(
             {
                 "contains": "localflow-job",
