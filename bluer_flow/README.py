@@ -26,7 +26,7 @@ def build():
             ),
         )
         for readme in [
-            {"items": [], "path": ".."},
+            {"items": workflow_items, "path": ".."},
             # aliases
             {"path": "docs/aliases/localflow.md"},
             {"path": "docs/aliases/workflow.md"},
