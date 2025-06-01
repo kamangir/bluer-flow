@@ -68,7 +68,7 @@ def complete_job(
 
         remaining_dependencies = [
             dependency.split("depends-on-", 1)[1]
-            for dependency, value in list_of_tags
+            for dependency, value in list_of_tags.items()
             if dependency.startswith("depends-on-") and value == 1
         ]
         if remaining_dependencies:

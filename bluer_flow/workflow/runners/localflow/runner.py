@@ -34,7 +34,7 @@ class LocalFlowRunner(GenericRunner):
             value=command_line,
             upload=True,
         ):
-            return False
+            return False, {"job_id": job_name}
 
         list_of_tags = {f"depends-on-{dependency}": 1 for dependency in dependencies}
         list_of_tags.update(
@@ -49,4 +49,4 @@ class LocalFlowRunner(GenericRunner):
             object_name=job_name,
             tags=list_of_tags,
             icon=ICON,
-        )
+        ), {"job_id": job_name}

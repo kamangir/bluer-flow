@@ -36,9 +36,10 @@ function bluer_flow_localflow_start() {
         local command_line=$(bluer_objects_metadata_get \
             key=command_line,object \
             $job_name)
+        command_line=${command_line//\"/}
 
         bluer_ai_log "⏳ command: $command_line"
-        bluer_ai_eval - "$command_line"
+        bluer_ai_eval - $command_line
         local status="$?"
 
         python3 -m bluer_flow.workflow.runners.localflow \
