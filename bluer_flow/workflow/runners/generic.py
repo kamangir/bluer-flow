@@ -182,7 +182,7 @@ class GenericRunner:
         type: str = "cpu",
     ) -> Tuple[bool, Any]:
         logger.info(
-            "⏳ {}.{}: {}[{}]: {} X {}: {}".format(
+            "⏳ {}.{}: {}[{}]: {} X {} dependency(s): {}".format(
                 NAME,
                 self.__class__.__name__,
                 job_name,

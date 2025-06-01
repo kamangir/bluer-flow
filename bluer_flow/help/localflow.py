@@ -7,7 +7,7 @@ def help_eval(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = xtra("-", mono=mono)
+    options = xtra("type=<cpu|gpu>,verbose", mono=mono)
 
     return show_usage(
         [

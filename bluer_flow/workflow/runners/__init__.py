@@ -5,6 +5,7 @@ from enum import Enum, auto
 class RunnerType(Enum):
     GENERIC = auto()
     LOCAL = auto()
+    LOCALFLOW = auto()
 
 
 def list_of_runners() -> List[str]:

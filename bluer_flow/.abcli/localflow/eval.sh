@@ -2,24 +2,14 @@
 
 function bluer_flow_localflow_eval() {
     local options=$1
+    local type=$(bluer_ai_option "$options" type cpu)
+    local verbose=$(bluer_ai_option_int "$options" verbose 0)
 
-    local object_name_1=$(bluer_ai_clarify_object $2 .)
+    local command_line="${@:2}"
 
-    [[ "$do_download" == 1 ]] &&
-        bluer_objects_download - $object_name_1
-
-    local object_name_2=$(bluer_ai_clarify_object $3 bluer_flow_localflow_eval-$(bluer_ai_string_timestamp))
-
-    bluer_ai_eval dryrun=$do_dryrun \
-        python3 -m bluer_flow.localflow \
+    python3 -m bluer_flow.workflow.runners.localflow \
         eval \
-        --object_name_1 $object_name_1 \
-        --object_name_2 $object_name_2 \
-        "${@:4}"
-    local status="$?"
-
-    [[ "$do_upload" == 1 ]] &&
-        bluer_objects_upload - $object_name_2
-
-    return $status
+        --command_line "$command_line" \
+        --type $type \
+        --verbose $verbose
 }

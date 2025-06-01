@@ -16,16 +16,30 @@ parser.add_argument(
     help="eval",
 )
 parser.add_argument(
-    "--arg",
-    type=bool,
+    "--command_line",
+    type=str,
+)
+parser.add_argument(
+    "--type",
+    type=str,
+    default="cpu",
+    help="cpu | gpu",
+)
+parser.add_argument(
+    "--verbose",
+    type=int,
     default=0,
-    help="0|1",
+    help="0 | 1",
 )
 args = parser.parse_args()
 
 success = False
 if args.task == "eval":
-    success = eval(args.arg)
+    success = eval(
+        command_line=args.command_line,
+        type=args.type,
+        verbose=args.verbose == 1,
+    )
 else:
     success = None
 
