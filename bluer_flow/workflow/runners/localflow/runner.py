@@ -1,8 +1,10 @@
 from typing import Any, List, Tuple
+from tqdm import tqdm
 
-from bluer_objects.mlflow.tags import set_tags
+from bluer_objects.mlflow.tags import set_tags, get_tags
 from bluer_objects.metadata import post_to_object
 
+from bluer_flow.workflow.generic import Workflow
 from bluer_flow.workflow.runners.generic import GenericRunner
 from bluer_flow.workflow.runners.localflow import ICON
 
@@ -11,6 +13,20 @@ class LocalFlowRunner(GenericRunner):
     def __init__(self, **kw_args):
         super().__init__(**kw_args)
         self.type_name: str = "localflow"
+
+    def monitor_function(
+        self,
+        workflow: Workflow,
+        hot_node: str,
+    ) -> Workflow:
+        workflow = super().monitor_function(workflow, hot_node)
+
+        for node in tqdm(workflow.G.nodes):
+            workflow.G.nodes[node]["status"] = get_tags(
+                object_name=workflow.node_job_name(node),
+            )[1].get("status", "UNKNOWN")
+
+        return workflow
 
     def submit_command(
         self,
