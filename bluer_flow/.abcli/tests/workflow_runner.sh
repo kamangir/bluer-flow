@@ -3,7 +3,10 @@
 function test_bluer_flow_workflow_runner() {
     local options=$1
     local do_dryrun=$(bluer_ai_option_int "$options" dryrun 0)
-    local do_publish=$(bluer_ai_option_int "$options" publish 0)
+    local do_publish=1
+    [[ "$abcli_is_github_workflow" == true ]] &&
+        do_publish=0
+    local do_publish=$(bluer_ai_option_int "$options" publish $do_publish)
     local list_of_runners=$(bluer_ai_option "$options" runner $BLUER_FLOW_RUNNERS_LIST)
     local list_of_patterns=$(bluer_ai_option "$options" pattern $BLUER_FLOW_PATTERNS_LIST)
 
