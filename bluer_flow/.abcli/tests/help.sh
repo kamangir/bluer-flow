@@ -5,6 +5,11 @@ function test_bluer_flow_help() {
 
     local module
     for module in \
+        "localflow" \
+        "localflow eval" \
+        "localflow list" \
+        "localflow start" \
+        \
         "@flow workflow" \
         "@flow workflow create" \
         "@flow workflow monitor" \
