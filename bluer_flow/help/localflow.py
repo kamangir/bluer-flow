@@ -25,10 +25,13 @@ def help_list(
     tokens: List[str],
     mono: bool,
 ) -> str:
+    options = xtra("status=<status>", mono=mono)
+
     return show_usage(
         [
             "localflow",
             "list",
+            f"[{options}]",
         ],
         "list localflow jobs.",
         mono=mono,

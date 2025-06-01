@@ -2,27 +2,17 @@
 
 function bluer_flow_localflow_list() {
     local options=$1
-    local do_dryrun=$(bluer_ai_option_int "$options" dryrun 0)
-    local do_download=$(bluer_ai_option_int "$options" download $(bluer_ai_not $do_dryrun))
-    local do_upload=$(bluer_ai_option_int "$options" upload $(bluer_ai_not $do_dryrun))
+    local list_of_status=$(bluer_ai_option "$options" status PENDING+RUNNABLE+RUNNING+FAILED)
 
-    local object_name_1=$(bluer_ai_clarify_object $2 .)
+    local status
+    for status in $(echo $list_of_status | tr + " "); do
+        bluer_ai_log "$status"
 
-    [[ "$do_download" == 1 ]] &&
-        bluer_objects_download - $object_name_1
+        bluer_objects_mlflow_tags_search \
+            contains=localflow-job,status=$status \
+            --item_name_plural "job(s)" \
+            --log 1
+    done
 
-    local object_name_2=$(bluer_ai_clarify_object $3 bluer_flow_localflow_list-$(bluer_ai_string_timestamp))
-
-    bluer_ai_list dryrun=$do_dryrun \
-        python3 -m bluer_flow.localflow \
-        list \
-        --object_name_1 $object_name_1 \
-        --object_name_2 $object_name_2 \
-        "${@:4}"
-    local status="$?"
-
-    [[ "$do_upload" == 1 ]] &&
-        bluer_objects_upload - $object_name_2
-
-    return $status
+    return 0
 }
