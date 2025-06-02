@@ -21,9 +21,9 @@ items = (
             (
                 [
                     (
-                        f"[{runner_type}](./workflow/runners/{runner_type}/runner.py)"
+                        f"[{runner_type}](./bluer_flow/workflow/runners/{runner_type}/runner.py)"
                         if runner_type == "localflow"
-                        else f"[{runner_type}](./workflow/runners/{runner_type}.py)"
+                        else f"[{runner_type}](./bluer_flow/workflow/runners/{runner_type}.py)"
                     )
                 ]
                 + [
