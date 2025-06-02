@@ -2,4 +2,6 @@
 
 alias @flow=bluer_flow
 
-alias workflow="bluer_flow_workflow"
+alias localflow=bluer_flow_localflow
+
+alias workflow=bluer_flow_workflow

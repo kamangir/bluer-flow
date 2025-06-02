@@ -19,7 +19,13 @@ items = (
         lambda x, y: x + y,
         [
             (
-                [f"[{runner_type}](./runners/{runner_type}.py)"]
+                [
+                    (
+                        f"[{runner_type}](./bluer_flow/workflow/runners/{runner_type}/runner.py)"
+                        if runner_type == "localflow"
+                        else f"[{runner_type}](./bluer_flow/workflow/runners/{runner_type}.py)"
+                    )
+                ]
                 + [
                     f"[![image]({url})]({url}) [🔗]({url})"
                     for url in [

@@ -11,3 +11,6 @@ def test_required_env():
 
 def test_bluer_flow_env():
     assert env.BLUER_FLOW_DEFAULT_WORKFLOW_PATTERN
+
+    assert isinstance(env.LOCALFLOW_SLEEP_BETWEEN_JOBS, int)
+    assert env.LOCALFLOW_SLEEP_BETWEEN_JOBS > 0

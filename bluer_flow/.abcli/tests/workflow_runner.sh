@@ -3,8 +3,15 @@
 function test_bluer_flow_workflow_runner() {
     local options=$1
     local do_dryrun=$(bluer_ai_option_int "$options" dryrun 0)
+    local do_publish=1
+    [[ "$abcli_is_github_workflow" == true ]] &&
+        do_publish=0
+    local do_publish=$(bluer_ai_option_int "$options" publish $do_publish)
     local list_of_runners=$(bluer_ai_option "$options" runner $BLUER_FLOW_RUNNERS_LIST)
-    local list_of_patterns=$(bluer_ai_option "$options" pattern $BLUER_FLOW_PATTERNS_LIST)
+    local list_of_patterns=$BLUER_FLOW_PATTERNS_LIST
+    [[ "$abcli_is_github_workflow" == true ]] &&
+        list_of_patterns="a-bc-d"
+    list_of_patterns=$(bluer_ai_option "$options" pattern $list_of_patterns)
 
     local pattern
     local runner
@@ -25,12 +32,18 @@ function test_bluer_flow_workflow_runner() {
                 $job_name
             [[ $? -ne 0 ]] && return 1
 
+            if [[ "$runner" == "localflow" ]]; then
+                bluer_flow_localflow_start \
+                    exit_if_no_job
+                [[ $? -ne 0 ]] && return 1
+            fi
+
             bluer_flow_workflow_monitor \
                 publish_as=$runner-$pattern \
                 $job_name
             [[ $? -ne 0 ]] && return 1
 
-            if [[ "$abcli_is_mac" == true ]]; then
+            if [[ "$do_publish" == 1 ]]; then
                 bluer_sandbox_assets_publish \
                     extensions=gif,push \
                     $job_name \
