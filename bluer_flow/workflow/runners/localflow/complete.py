@@ -2,7 +2,7 @@ from tqdm import tqdm
 
 from blueness import module
 from bluer_objects.mlflow.lock.functions import lock, unlock
-from bluer_objects.mlflow.tags import set_tags, get_tags, search, create_filter_string
+from bluer_objects.mlflow.tags import get_tags, search, set_tags
 
 from bluer_flow import NAME
 from bluer_flow.workflow.runners.localflow import ICON
@@ -31,13 +31,13 @@ def complete_job(
         logger.error("job failed, will not clear dependencies.")
         return True
 
-    list_of_dependent_jobs = search(
-        create_filter_string(
-            {
-                f"depends-on-{job_name}": "yes",
-            }
-        )
+    success, list_of_dependent_jobs = search(
+        {
+            f"depends-on-{job_name}": "yes",
+        }
     )
+    if not success:
+        return False
     if not list_of_dependent_jobs:
         logger.info("no dependent job.")
         return True
