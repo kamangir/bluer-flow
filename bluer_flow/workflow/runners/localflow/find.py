@@ -2,7 +2,7 @@ from typing import Tuple
 
 from bluer_ai.env import bluer_ai_gpu_status_cache
 from bluer_objects.mlflow.lock.functions import lock, unlock
-from bluer_objects.mlflow.tags import search, create_filter_string, set_tags
+from bluer_objects.mlflow.tags import search, set_tags
 
 from bluer_flow.logger import logger
 
@@ -15,15 +15,16 @@ def find_job(verbose: bool = True) -> Tuple[bool, str]:
     ):
         return False, ""
 
-    list_of_jobs = search(
-        create_filter_string(
-            {
-                "contains": "localflow-job",
-                "status": "RUNNABLE",
-                "type": "gpu" if bluer_ai_gpu_status_cache == "true" else "cpu",
-            }
-        )
+    success, list_of_jobs = search(
+        {
+            "contains": "localflow-job",
+            "status": "RUNNABLE",
+            "type": "gpu" if bluer_ai_gpu_status_cache == "true" else "cpu",
+        }
     )
+    if not success:
+        return False, ""
+
     job_name = list_of_jobs[0] if len(list_of_jobs) > 0 else ""
 
     if job_name:
