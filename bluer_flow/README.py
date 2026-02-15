@@ -9,9 +9,10 @@ from bluer_flow.workflow.patterns import list_of_patterns
 from bluer_flow.help.functions import help_functions
 
 
-def build():
+def build(args):
     return all(
         README.build(
+            args=args,
             items=readme.get("items", []),
             cols=len(list_of_patterns()) + 1,
             path=os.path.join(file.path(__file__), readme["path"]),
