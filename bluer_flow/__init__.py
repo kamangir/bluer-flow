@@ -4,7 +4,7 @@ ICON = "📜"
 
 DESCRIPTION = f"{ICON} Workflow management."
 
-VERSION = "5.61.1"
+VERSION = "5.62.1"
 
 REPO_NAME = "bluer-flow"
 
